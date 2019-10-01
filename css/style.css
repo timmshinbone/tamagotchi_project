@@ -1,3 +1,12 @@
 body {
-	background-color: indianred;
+	display: flex;
+	justify-content: center;
+	background-color: lightblue;
+}
+
+.tomagotchi {
+	background-color: yellowgreen;
+	height: 100px;
+	width: 100px;
+	border-radius: 75%;
 }
