@@ -8,10 +8,16 @@
 <body>
 	<div id="gameWindow">
 		<header id="infoBox">
-			<h2 class="title">TAMAGOTCHI</h2>
+			<h3 class="title">TAMAGOTCHI</h3>
+			<form class="nameTama">
+				<input type="text" placeholder="name your tamagotchi" id="nameTamaInput"/>
+				<input type="submit"></form>
+			</form>
 			<nav class="gameInfo">
-				<span class="timer"></span>
-				<span class="age"></span>
+				<span class="timer">Time:</span>
+				<span class="age">Age:</span>
+				<span class="hunger">Hunger:</span>
+				<span class="boredom">Boredom:</span>
 			</nav>
 		</header>
 		<main id="tamagotchiTank">
@@ -21,6 +27,9 @@
 		</main>
 		<footer class="buttons">
 			<button id="begin">New Tamagotchi</button>
+			<button id="feed">Feed</button>
+			<button id="sleep">Light's out!</button>
+			<button id="play">Play</button>
 		</footer>	
 	</div>
 	<script type="text/javascript" src="js/app.js"></script>

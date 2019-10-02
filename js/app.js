@@ -43,39 +43,30 @@ const game = {
 
 	startGame(){
 
-		const $startButton = $(`#begin`);
-		($startButton).on("click", () => {
-			console.log("button works");
-		});
 	},
 
-	setTimer(){
-    	const $timer = $('#timer');
-    	const interval = setInterval(() =>{
 
-        	if(this.time === 0){
-
-          		clearInterval(interval); // stops the interval
-          		this.round++
-        	} else {
-          		this.time--
-        	}
-
-        // update the time on the dom
-        $timer.text(`timer: ${this.time}s`)
-
-    }, 1000) },
 
 }
+// game.startGame();
 
-game.startGame();
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// below this line are the event handlers, these tell the game what to do based on user input
+
+$("form").on("submit", (e) => {
+	//prevent page refresh
+	e.preventDefault();
+	// prompt("A new Tamagotchi has just hatched, what's its name?");
+	// const $tamaName = $startButton.val();
+	console.log("Your Tamagotchi is named " + ($('#nameTamaInput').val()) + "!");
+});
 // 	time
 // 	//properties outside of the tomagotchi, like timer
 // // Add the ability to name your pet.
 
 // ////DO NOT HAVE MORE THAN ONE INTERVAL////
 
-// 	//objects to feed the tomagotchi
+// 	//objects to feed the tamagotchi
 // 	//
 // // Add buttons to the screen to feed your pet, turn off the lights, and play with your pet.
 
