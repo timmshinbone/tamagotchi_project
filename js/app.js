@@ -52,6 +52,7 @@ const game = {
 	startGame(){
 		//instantiate new Tamagotchi, make tamagotchi show up
 		this.makeNewTamagotchi();
+		this.startTheClock();
 		// this.pet = new Tamagotchi("$("#nameTamaInput").val()")
 		//have tamagotchi ask its name
 	},
@@ -62,6 +63,15 @@ const game = {
 		this.pet = new Tamagotchi(name);
 	},
 
+	startTheClock(){
+		let $timer = $("#timer");
+
+		const interval = setInterval(() => {
+			//count seconds moving up
+			$timer.text("Timer: " + (this.time+=1) + "s");
+			//clear interval on death of tamagotchi
+		}, 1000);
+	},
 
 }
 // game.startGame();

@@ -37,10 +37,13 @@ body {
 }
 
 .tamagotchi {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: yellowgreen;
 	height: 100px;
 	width: 100px;
-	border-radius: 75%;
+	border-radius: 50%;
 }
 
 
