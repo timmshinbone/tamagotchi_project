@@ -38,6 +38,7 @@ body {
 
 .tamagotchi {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	font-family: 'Bad Script', cursive;
