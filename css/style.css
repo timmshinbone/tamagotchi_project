@@ -7,9 +7,10 @@ body {
 	display: flex;
 	flex-direction: column;
 }
-header {
+#infoBox {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	align-content: center;
 	min-height: 100px;
 	min-width: 600px;
 	border: 1.5px solid grey;
