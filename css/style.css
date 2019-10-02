@@ -40,6 +40,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: 'Bad Script', cursive;
 	background-color: yellowgreen;
 	height: 100px;
 	width: 100px;
