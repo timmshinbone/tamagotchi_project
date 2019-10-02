@@ -10,7 +10,7 @@ body {
 #infoBox {
 	display: flex;
 	flex-direction: column;
-	align-content: center;
+	align-content: flex-end;
 	min-height: 100px;
 	min-width: 600px;
 	border: 1.5px solid grey;
@@ -42,6 +42,12 @@ body {
 
 h2 {
 	text-align: center;
+}
+
+span {
+	width:148px;
+	border: 1px solid grey;
+	align-self: flex-end;
 }
 
 

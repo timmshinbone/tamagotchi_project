@@ -38,9 +38,10 @@ class Tamagotchi{
 // below this line is the game object, describes what events do when the user interacts with them
 
 const game = {
-
+	//default starting state of the game
 	blankTank(){
 		$("div.tamagotchi").hide();
+		$("form.nameTama").hide();
 	},
 
 	time: 0,
@@ -71,10 +72,12 @@ $("form").on("submit", (e) => {
 	console.log("Your Tamagotchi is named " + ($('#nameTamaInput').val()) + "!");
 	const $title = $("h3.title");
 	$title.text($("#nameTamaInput").val());
+	$("form.nameTama").hide("slow");
 });
 
 $("#begin").on("click", () => {
-	$("div.tamagotchi").show("fast",)
+	$("div.tamagotchi").show("slow",);
+	$("form.nameTama").show();
 });
 
 // 	time
