@@ -1,4 +1,4 @@
-// console.log("js works");
+////////////////////////TAMAGOTCHI PROJECT////////////////////////////////
 
 class Tamagotchi{
 	//things the tomagotchi can do are methods of the tomagotchi
@@ -41,6 +41,14 @@ const game = {
 
 	time: 0,
 
+	startGame(){
+
+		const $startButton = $(`#begin`);
+		($startButton).on("click", () => {
+			console.log("button works");
+		});
+	},
+
 	setTimer(){
     	const $timer = $('#timer');
     	const interval = setInterval(() =>{
@@ -58,8 +66,9 @@ const game = {
 
     }, 1000) },
 
-
 }
+
+game.startGame();
 // 	time
 // 	//properties outside of the tomagotchi, like timer
 // // Add the ability to name your pet.
