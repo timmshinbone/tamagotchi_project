@@ -3,20 +3,20 @@
 class Tamagotchi{
 	//things the tomagotchi can do are methods of the tomagotchi
 	constructor (name){
-		this.name = (this.getAName.input); 
+		this.name = name; 
 		this.hunger = 0;
 		this.sleepy = 0;
 		this.boredom = 0;
 		this.age = 0;
-		getAName = function() {
-			//tamaSpeechBubble - "Who am I? What is my name!"
-			//make input box show up in header
-		};
+		// getAName = function() {
+		// 	//tamaSpeechBubble - "Who am I? What is my name!"
+		// 	//make input box show up in header
+		// };
 		
-		announceHunger = function(){
-			//at hunger <= 5 tamaSpeechBubble - "I'm hungry, can I have a burger?"
-		};
-	};
+	// 	announceHunger = function(){
+	// 		//at hunger <= 5 tamaSpeechBubble - "I'm hungry, can I have a burger?"
+	// 	};
+	// };
 		// bounceAround(){
 
 		// };
@@ -29,7 +29,7 @@ class Tamagotchi{
 		// die(){
 
 		// };
-	// },
+	}
 }
 
 
@@ -38,7 +38,7 @@ class Tamagotchi{
 // below this line is the game object, describes what events do when the user interacts with them
 
 const game = {
-	//default starting state of the game
+	//default starting state of the game, empty "tank", asks for new tamagotchi
 	blankTank(){
 		$("div.tamagotchi").hide();
 		$("form.nameTama").hide();
@@ -49,35 +49,44 @@ const game = {
 
 
 
-	// startGame(){
-		
-	// 	//instantiate new Tamagotchi, make tamagotchi show up
-	// 	this.pet = new Tamagotchi("$("#nameTamaInput").val()")
-
-	// 	//have tamagotchi ask its name
-	// },
-
+	startGame(){
+		//instantiate new Tamagotchi, make tamagotchi show up
+		this.makeNewTamagotchi();
+		// this.pet = new Tamagotchi("$("#nameTamaInput").val()")
+		//have tamagotchi ask its name
+	},
+//instantiates new Tamagotchi, make tamagotchi show up, name form shows up
+	makeNewTamagotchi(name){
+		$("div.tamagotchi").show("slow",);
+		$("form.nameTama").show();
+		this.pet = new Tamagotchi(name);
+	},
 
 
 }
 // game.startGame();
+
 game.blankTank();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // below this line are the event handlers, these tell the game what to do based on user input
 
+$("#begin").on("click", () => {
+	game.startGame();
+	// $("div.tamagotchi").show("slow",);
+	// $("form.nameTama").show();
+});
+
 $("form").on("submit", (e) => {
 	//prevent page refresh
 	e.preventDefault();
 	console.log("Your Tamagotchi is named " + ($('#nameTamaInput').val()) + "!");
+	const tamaName = $("#nameTamaInput").val()
 	const $title = $("h3.title");
+	// const $tamaName = $(Tamagotchi.name);
 	$title.text($("#nameTamaInput").val());
 	$("form.nameTama").hide("slow");
-});
-
-$("#begin").on("click", () => {
-	$("div.tamagotchi").show("slow",);
-	$("form.nameTama").show();
+	game.makeNewTamagotchi(tamaName);
 });
 
 // 	time
