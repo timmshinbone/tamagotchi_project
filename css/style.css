@@ -10,17 +10,18 @@ body {
 #infoBox {
 	display: flex;
 	flex-direction: column;
-	align-content: space-between;
+	align-content: center;
 	min-height: 100px;
 	min-width: 600px;
 	border: 1.5px solid grey;
 }
 
+
 .gameInfo {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	align-content: space-evenly;
+	align-content: space-around;
 }
 
 #tamagotchiTank {
@@ -38,3 +39,33 @@ body {
 	width: 100px;
 	border-radius: 75%;
 }
+
+h2 {
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

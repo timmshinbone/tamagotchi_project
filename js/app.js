@@ -2,19 +2,19 @@
 
 class Tamagotchi{
 	//things the tomagotchi can do are methods of the tomagotchi
-	constructor (name, age, ){
+	constructor (name){
 		this.name = (this.getAName.input); 
 		this.hunger = 0;
 		this.sleepy = 0;
 		this.boredom = 0;
 		this.age = 0;
 		getAName = function() {
-			prompt("WHAT! WHERE AM I?! WHO AM I?! GIVE ME A NAME!");
-
+			//tamaSpeechBubble - "Who am I? What is my name!"
+			//make input box show up in header
 		};
 		
-		announceItself = function(){
-			alert("Hello! I'm your tomagotchi " + (this.name))
+		announceHunger = function(){
+			//at hunger <= 5 tamaSpeechBubble - "I'm hungry, can I have a burger?"
 		};
 	};
 		// bounceAround(){
@@ -39,16 +39,28 @@ class Tamagotchi{
 
 const game = {
 
-	time: 0,
-
-	startGame(){
-
+	blankTank(){
+		$("div.tamagotchi").hide();
 	},
+
+	time: 0,
+	pet: null,
+
+
+
+	// startGame(){
+		
+	// 	//instantiate new Tamagotchi, make tamagotchi show up
+	// 	this.pet = new Tamagotchi("$("#nameTamaInput").val()")
+
+	// 	//have tamagotchi ask its name
+	// },
 
 
 
 }
 // game.startGame();
+game.blankTank();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // below this line are the event handlers, these tell the game what to do based on user input
@@ -56,10 +68,15 @@ const game = {
 $("form").on("submit", (e) => {
 	//prevent page refresh
 	e.preventDefault();
-	// prompt("A new Tamagotchi has just hatched, what's its name?");
-	// const $tamaName = $startButton.val();
 	console.log("Your Tamagotchi is named " + ($('#nameTamaInput').val()) + "!");
+	const $title = $("h3.title");
+	$title.text($("#nameTamaInput").val());
 });
+
+$("#begin").on("click", () => {
+	$("div.tamagotchi").show("fast",)
+});
+
 // 	time
 // 	//properties outside of the tomagotchi, like timer
 // // Add the ability to name your pet.
