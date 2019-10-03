@@ -152,10 +152,10 @@ const game = {
 		if(this.pet.sleepy >= 6){
 			$eyes.html("ı ı")
 			console.log($eyes);
-			// .css("transform", "rotate(90deg)")
+			$eyes.css("transform", "rotate(90deg)")
 		} else if(this.pet.sleepy < 6){
 			$eyes.text("o o")
-			// .css("font-size", "30px")
+			$eyes.css("font-size", "30px")
 		}
 	},
 
