@@ -36,7 +36,7 @@ body {
 	border: 1.5px solid grey;
 }
 
-.tamagotchi {
+#tamagotchi {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

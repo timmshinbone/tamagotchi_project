@@ -40,12 +40,12 @@ class Tamagotchi{
 const game = {
 	//default starting state of the game, empty "tank", asks for new tamagotchi
 	blankTank(){
-		$("div.tamagotchi").hide();
+		$("#tamagotchi").hide();
 		$("form.nameTama").hide();
 	},
 
 	// time: 0,
-	hunger: 0,
+	time: 0,
 	pet: null,
 
 
@@ -60,12 +60,13 @@ const game = {
 	},
 //instantiates new Tamagotchi, make tamagotchi show up, name form shows up
 	makeNewTamagotchi(name){
-		$("div.tamagotchi").show("slow",);
+		$("#tamagotchi").show("slow",);
 		$("form.nameTama").show();
 		this.pet = new Tamagotchi(name);
 	},
 
 	startTheClock(){
+
 		let $sleepy = $("#sleepy");
 		let $age = $("#age");
 		let $hunger = $("#hunger");
@@ -73,12 +74,43 @@ const game = {
 
 		const interval = setInterval(() => {
 			//count seconds moving up
-			$sleepy.text("Sleepy: " + (this.pet.sleepy += 1));
-			$age.text("Age: " + (this.pet.age += 1));
-			$hunger.text("Hunger: " + (this.pet.hunger += 1));
-			$boredom.text("Boredom: " + (this.pet.boredom += 1));
+			this.time += 1;
+			console.log(this.time);
+			if(this.time % 3 === 0){
+				$sleepy.text("Sleepy: " + (this.pet.sleepy += 1));
+			} else if(this.time % 5 === 0){
+				$age.text("Age: " + (this.pet.age += 1));
+			} else if(this.time % 2 === 0){
+				$hunger.text("Hunger: " + (this.pet.hunger += 1));
+			} else if(this.time % 3 === 0){
+				$boredom.text("Boredom: " + (this.pet.boredom += 1));
+			}
 			//clear interval on death of tamagotchi
-		}, 5000);
+		}, 2000);
+	},
+
+	lightsOut() {
+		const $lights = $("#tamagotchiTank");
+		const $sleepyTama = $("#tamagotchi");
+		let $sleepy = $("#sleepy")
+		//on click turn lights off
+		$lights.css("background", "rgba(0,0,0,.6)");
+		$sleepyTama.hide("slow");
+		//set sleepy to 0
+		this.pet.sleepy = 0;
+		$sleepy.text("Sleepy: " + 0);
+		//clear time interval
+		clearInterval(this.interval);
+	},
+
+		//on click turn lights back on
+	lightsOn(){
+		const $lights = $("#tamagotchiTank");
+		const $wakeUpTama = $("#tamagotchi");
+
+		$lights.css("background", "rgba(0,0,0,0)");
+		$wakeUpTama.show("slow");
+		//restart timers
 	},
 
 	// makeTamaHungry(){
@@ -119,6 +151,15 @@ $("form").on("submit", (e) => {
 	game.makeNewTamagotchi(tamaName);
 });
 
+$("#sleep").on("click", () => {
+	game.lightsOut();
+	console.log("lights out button works");
+});
+
+$("#wakeUp").on("click", () => {
+	game.lightsOn();
+	console.log("lights on button works");
+})
 // 	time
 // 	//properties outside of the tomagotchi, like timer
 // // Add the ability to name your pet.
