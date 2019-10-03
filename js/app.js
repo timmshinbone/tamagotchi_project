@@ -12,7 +12,17 @@ class Tamagotchi{
 		// 	//tamaSpeechBubble - "Who am I? What is my name!"
 		// 	//make input box show up in header
 		// };
-		
+		this.sleepyEyes = "= =";
+		this.sleepyMouth = "/";
+
+		this.boredEyes = "¬ ¬";
+		this.boredMouth = "/";
+
+		this.hungryEyes = "• •";
+		this.hungryMouth = "(";
+
+		this.deadEyes = "X x";
+		this.deadMouth = "|"
 	// 	announceHunger = function(){
 	// 		//at hunger <= 5 tamaSpeechBubble - "I'm hungry, can I have a burger?"
 	// 	};
@@ -77,26 +87,32 @@ const game = {
 			//count seconds moving up
 			this.time += 1;
 			// console.log(this.time);
-			if(this.time % 3 === 0){
+			if(this.pet.sleepy >= 10 || this.pet.hunger >= 10 || this.pet.boredom >= 10){
+				clearInterval(interval)
+				// this.tamaDies();
+			}
+
+			if(this.time % 8 === 0){
 				this.pet.sleepy += 1
 				
 			} 
-			if(this.time % 5 === 0){
+			if(this.time % 7 === 0){
 				this.pet.age += 1
 				
 			} 
-			if(this.time % 2 === 0){
+			if(this.time % 4 === 0){
 				this.pet.hunger += 1
+			}
+			if(this.time % 6 === 0){
 				this.pet.boredom += 1
-				
-				console.log("boredom should increase");
 			}
 
 			this.printInfo()
 
-			this.getSleepy(); // adj eyes if nec
-			this.getBored();
-			this.tamaDies();
+			this.faceChanges();
+			// this.getBored()
+			// this.getSleepy() // adj eyes if nec
+			// this.getHungry()
 			//clear interval on death of tamagotchi
 		}, 1000);
 	},
@@ -149,7 +165,7 @@ const game = {
 		setTimeout(() => {
 			// console.log("it's been 2s");
 			$food.fadeOut("slow");
-		}, 500)
+		}, 1000)
 		// if(this.time % 2 === 0){
 		// 	console.log("SHOULD FADE");
 		// }
@@ -161,37 +177,76 @@ const game = {
 
 		$eyes.fadeOut("slow");
 		$eyes.fadeIn("slow");
-		
+
 		this.pet.boredom = 0;
 		this.printInfo()
 	},
 
-	getSleepy(){
+	faceChanges(){
 		const $eyes = $("#eyes");
 		const $mouth = $("#mouth");
-		if(this.pet.sleepy >= 6){
-			$eyes.text("= =");
-			$mouth.text("/");
-			// $eyes.css("transform", "rotate(90deg)")
-		} else if(this.pet.sleepy < 6){
+		const $heDed = $("#heDed");
+		if(this.pet.sleepy < 6 && this.pet.boredom < 6 && this.pet.hunger < 6) {
 			$eyes.text("o o");
-			// $eyes.css("font-size", "30px")
 			$mouth.text(")");
+		}
+		if(this.pet.sleepy >= 6){
+			$eyes.text(this.pet.sleepyEyes);
+			$mouth.text(this.pet.sleepyMouth);
+		}
+		if(this.pet.hunger >= 6){
+			$eyes.text(this.pet.hungryEyes);
+			$mouth.text(this.pet.hungryMouth);
+		}
+		if(this.pet.boredom >= 6){
+			$eyes.text(this.pet.boredEyes);
+			$mouth.text(this.pet.boredMouth);
+		}
+		if(this.pet.sleepy >= 10 || this.pet.hunger >= 10 || this.pet.boredom >= 10){
+			// $eyes.text(this.pet.deadEyes)
+			// $mouth.text(this.pet.deadMouth)
+			// $("#heDed").show();
+			this.tamaDies();
 		}
 	},
 
-	getBored(){
-		const $eyes = $("#eyes");
-		const $mouth = $("#mouth");
-		if(this.pet.boredom >= 6){
-			$eyes.text("¬ ¬");
-			$mouth.text("/");
-		} else if(this.pet.boredom < 6){
-			$eyes.text("o o");
-			// $eyes.css("font-size", "30px")
-			$mouth.text(")");
-		}
-	},
+	// getSleepy(){
+	// 	const $eyes = $("#eyes");
+	// 	const $mouth = $("#mouth");
+	// 	if(this.pet.sleepy >= 6){
+	// 		$eyes.text("= =");
+	// 		$mouth.text("/");
+	// 		// $eyes.css("transform", "rotate(90deg)")
+	// 	} else if(this.pet.sleepy < 6){
+	// 		$eyes.text("o o");
+	// 		// $eyes.css("font-size", "30px")
+	// 		$mouth.text(")");
+	// 	}
+	// },
+
+	// getBored(){
+	// 	const $eyes = $("#eyes");
+	// 	const $mouth = $("#mouth");
+	// 	if(this.pet.boredom >= 6){
+	// 		$eyes.text("¬ ¬");
+	// 		$mouth.text("/");
+	// 	} else if(this.pet.boredom < 6){
+	// 		$eyes.text("o o");
+	// 		// $eyes.css("font-size", "30px")
+	// 		$mouth.text(")");
+	// 	}
+	// },
+
+	// getHungry(){
+	// 	const $eyes = $("#eyes")
+	// 	const $mouth = $("#mouth");
+	// 	if(game.pet.hunger >= 6){
+	// 		$eyes.text("• •");
+	// 		$mouth.text("(");
+	// 	} else if(game.pet.hunger < 6);
+	// 		$eyes.text("o o");
+	// 		$mouth.text(")");
+	// },
 	// ageTama(){
 	// 	const $oldTama = $("#tamagotchi");
 	// 	if(this.pet.age > 7){
@@ -200,16 +255,9 @@ const game = {
 	// },
 
 	tamaDies(){
-		if(this.pet.sleepy >= 10){
-			$("#eyes").text("x x");
-			$("#heDed").text("OH NO! " + (game.pet.name) + " IS DED!").show();
-		} else if(this.pet.hunger >= 10){
-			$("#eyes").text("x x");
-			$("#heDed").text("OH NO! " + (game.pet.name) + " IS DED!").show();
-		} else if(this.pet.boredom >= 10){
-			$("#eyes").text("x x");
-			$("#heDed").text("OH NO! " + (game.pet.name) + " IS DED!").show();
-		} 
+		$("#eyes").text("x x");
+		$("#mouth").text("|");
+		$("#heDed").text("OH NO! " + (game.pet.name) + " IS DED!").show();	 
 	}
 }
 // game.startGame();
