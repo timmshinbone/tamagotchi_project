@@ -4,10 +4,10 @@ class Tamagotchi{
 	//things the tomagotchi can do are methods of the tomagotchi
 	constructor (name){
 		this.name = name; 
-		this.age = null;
-		this.sleepy = null;
-		this.hunger = null;
-		this.boredom = null;
+		this.age = 0;
+		this.sleepy = 0;
+		this.hunger = 0;
+		this.boredom = 0;
 		// getAName = function() {
 		// 	//tamaSpeechBubble - "Who am I? What is my name!"
 		// 	//make input box show up in header
@@ -59,11 +59,7 @@ const game = {
 		//instantiate new Tamagotchi, make tamagotchi show up
 		this.makeNewTamagotchi();
 		this.startTheClock();
-		this.getSleepy();
-		this.tamaDies();
-		// this.makeTamaHungry();
-		// this.pet = new Tamagotchi("$("#nameTamaInput").val()")
-		//have tamagotchi ask its name
+
 	},
 //instantiates new Tamagotchi, make tamagotchi show up, name form shows up
 	makeNewTamagotchi(name){
@@ -77,28 +73,43 @@ const game = {
 
 	startTheClock(){
 
-		let $sleepy = $("#sleepy");
-		let $age = $("#age");
-		let $hunger = $("#hunger");
-		let $boredom = $("#boredom");
-
 		const interval = setInterval(() => {
 			//count seconds moving up
 			this.time += 1;
 			// console.log(this.time);
 			if(this.time % 3 === 0){
-				$sleepy.text("Sleepy: " + (this.pet.sleepy += 1));
-			} else if(this.time % 5 === 0){
-				$age.text("Age: " + (this.pet.age += 1));
-			} else if(this.time % 2 === 0){
-				$hunger.text("Hunger: " + (this.pet.hunger += 1));
-			} else if(this.time % 4 === 0){
-				$boredom.text("Boredom: " + (this.pet.boredom += 1));
+				this.pet.sleepy += 1
+				
+			} 
+			if(this.time % 5 === 0){
+				this.pet.age += 1
+				
+			} 
+			if(this.time % 2 === 0){
+				this.pet.hunger += 1
+				this.pet.boredom += 1
+				
+				console.log("boredom should increase");
 			}
+
+			this.printInfo()
+
 			this.getSleepy(); // adj eyes if nec
+			this.getBored();
 			this.tamaDies();
 			//clear interval on death of tamagotchi
-		}, 500);
+		}, 1000);
+	},
+
+	printInfo() {
+		let $sleepy = $("#sleepy");
+		let $age = $("#age");
+		let $hunger = $("#hunger");
+		let $boredom = $("#boredom");		
+		$sleepy.text("Sleepy: " + this.pet.sleepy);
+		$age.text("Age: " + this.pet.age);
+		$hunger.text("Hunger: " + this.pet.hunger);
+		$boredom.text("Boredom: " + this.pet.boredom);		
 	},
 
 	lightsOut() {
@@ -110,7 +121,7 @@ const game = {
 		$sleepyTama.fadeOut("slow");
 		//set sleepy to 0
 		this.pet.sleepy = 0;
-		$sleepy.text("Sleepy: " + 0);
+		this.printInfo()
 		//clear time interval
 		clearInterval(this.interval);
 	},
@@ -123,7 +134,7 @@ const game = {
 
 		$lights.css("background", "rgba(0,0,0,0)");
 		$wakeUpTama.fadeIn("slow");
-		$sleepy.text("Sleepy: " + 0);
+		this.printInfo()
 		//restart timers
 	},
 
@@ -133,12 +144,12 @@ const game = {
 
 		$food.fadeIn("slow");
 		this.pet.hunger = 0;
-		$hunger.text("Hunger: " + 0);
+		this.printInfo()
 		
 		setTimeout(() => {
-			console.log("it's been 2s");
+			// console.log("it's been 2s");
 			$food.fadeOut("slow");
-		}, 2000)
+		}, 500)
 		// if(this.time % 2 === 0){
 		// 	console.log("SHOULD FADE");
 		// }
@@ -150,9 +161,9 @@ const game = {
 
 		$eyes.fadeOut("slow");
 		$eyes.fadeIn("slow");
-
+		
 		this.pet.boredom = 0;
-		$boredom.text("Boredom: " + 0);
+		this.printInfo()
 	},
 
 	getSleepy(){
@@ -164,11 +175,23 @@ const game = {
 			// $eyes.css("transform", "rotate(90deg)")
 		} else if(this.pet.sleepy < 6){
 			$eyes.text("o o");
-			$eyes.css("font-size", "30px")
+			// $eyes.css("font-size", "30px")
 			$mouth.text(")");
 		}
 	},
 
+	getBored(){
+		const $eyes = $("#eyes");
+		const $mouth = $("#mouth");
+		if(this.pet.boredom >= 6){
+			$eyes.text("¬ ¬");
+			$mouth.text("/");
+		} else if(this.pet.boredom < 6){
+			$eyes.text("o o");
+			// $eyes.css("font-size", "30px")
+			$mouth.text(")");
+		}
+	},
 	// ageTama(){
 	// 	const $oldTama = $("#tamagotchi");
 	// 	if(this.pet.age > 7){
@@ -186,7 +209,7 @@ const game = {
 		} else if(this.pet.boredom >= 10){
 			$("#eyes").text("x x");
 			$("#heDed").text("OH NO! " + (game.pet.name) + " IS DED!").show();
-		}
+		} 
 	}
 }
 // game.startGame();
