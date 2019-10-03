@@ -46,6 +46,7 @@ const game = {
 		$("#tamagotchi").hide();
 		$("form.nameTama").hide();
 		$("#food").hide();
+		$("#heDed").hide();
 	},
 
 	// time: 0,
@@ -94,8 +95,10 @@ const game = {
 			} else if(this.time % 4 === 0){
 				$boredom.text("Boredom: " + (this.pet.boredom += 1));
 			}
+			this.getSleepy(); // adj eyes if nec
+			this.tamaDies();
 			//clear interval on death of tamagotchi
-		}, 1000);
+		}, 500);
 	},
 
 	lightsOut() {
@@ -131,9 +134,14 @@ const game = {
 		$food.fadeIn("slow");
 		this.pet.hunger = 0;
 		$hunger.text("Hunger: " + 0);
-		if(this.time % 2 === 0){
+		
+		setTimeout(() => {
+			console.log("it's been 2s");
 			$food.fadeOut("slow");
-		}
+		}, 2000)
+		// if(this.time % 2 === 0){
+		// 	console.log("SHOULD FADE");
+		// }
 	},
 	
 	playWithTama(){
@@ -149,13 +157,15 @@ const game = {
 
 	getSleepy(){
 		const $eyes = $("#eyes");
+		const $mouth = $("#mouth");
 		if(this.pet.sleepy >= 6){
-			$eyes.html("ı ı")
-			console.log($eyes);
-			$eyes.css("transform", "rotate(90deg)")
+			$eyes.text("= =");
+			$mouth.text("/");
+			// $eyes.css("transform", "rotate(90deg)")
 		} else if(this.pet.sleepy < 6){
-			$eyes.text("o o")
+			$eyes.text("o o");
 			$eyes.css("font-size", "30px")
+			$mouth.text(")");
 		}
 	},
 
@@ -169,10 +179,13 @@ const game = {
 	tamaDies(){
 		if(this.pet.sleepy >= 10){
 			$("#eyes").text("x x");
+			$("#heDed").text("OH NO! " + (game.pet.name) + " IS DED!").show();
 		} else if(this.pet.hunger >= 10){
 			$("#eyes").text("x x");
+			$("#heDed").text("OH NO! " + (game.pet.name) + " IS DED!").show();
 		} else if(this.pet.boredom >= 10){
 			$("#eyes").text("x x");
+			$("#heDed").text("OH NO! " + (game.pet.name) + " IS DED!").show();
 		}
 	}
 }
@@ -193,7 +206,7 @@ $("#begin").on("click", () => {
 	// $("div.tamagotchi").show("slow",);
 	// $("form.nameTama").show();
 });
-
+//give tama a name
 $("form").on("submit", (e) => {
 	//prevent page refresh
 	e.preventDefault();
@@ -205,19 +218,19 @@ $("form").on("submit", (e) => {
 	$("form.nameTama").hide("slow");
 	game.makeNewTamagotchi(tamaName);
 });
-
+//operates the lightsout button
 $("#sleep").on("click", () => {
 	game.lightsOut();
 });
-
+//operates the lights on function
 $("#wakeUp").on("click", () => {
 	game.lightsOn();
-})
-
+});
+// opertes the feed button
 $("#feed").on("click", () => {
 	game.feedTama();
 })
-
+// operates play button
 $("#play").on("click", () => {
 	game.playWithTama();
 })

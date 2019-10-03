@@ -46,21 +46,7 @@ body {
 	height: 150px;
 	width: 150px;
 	border-radius: 50%;
-	i
-  	animation: beat 1s ease 0s infinite alternate
-  
-  
-	@keyframes beat
-	  0%
-	    transform: scale(1.1)
-	  25%
-	    transform: scale(0.9)
-	  50%
-	    transform: scale(1.2)
-	  75%
-	    transform: scale(1.1)
-	  100%
-	    transform: scale(1.0)
+
 }
 
 #eyes {
@@ -76,7 +62,7 @@ body {
 
 #food{
 	font-size: 20px;
-	margin-left: 200px;
+	margin-left: 20px;
 }
 
 span {
