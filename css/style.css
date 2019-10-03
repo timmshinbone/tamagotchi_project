@@ -48,6 +48,16 @@ body {
 	border-radius: 50%;
 }
 
+.eyes {
+	/*margin-top: 100px;*/
+	font-size: 30px;
+	
+}
+
+.mouth {
+	font-size: 30px;
+	/*transform: rotate(90deg);*/
+}
 
 span {
 	width:148px;

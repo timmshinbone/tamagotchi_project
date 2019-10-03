@@ -4,10 +4,10 @@ class Tamagotchi{
 	//things the tomagotchi can do are methods of the tomagotchi
 	constructor (name){
 		this.name = name; 
-		this.hunger = 0;
-		this.sleepy = 0;
-		this.boredom = 0;
-		this.age = 0;
+		this.age = null;
+		this.sleepy = null;
+		this.hunger = null;
+		this.boredom = null;
 		// getAName = function() {
 		// 	//tamaSpeechBubble - "Who am I? What is my name!"
 		// 	//make input box show up in header
@@ -44,7 +44,8 @@ const game = {
 		$("form.nameTama").hide();
 	},
 
-	time: 0,
+	// time: 0,
+	hunger: 0,
 	pet: null,
 
 
@@ -53,6 +54,7 @@ const game = {
 		//instantiate new Tamagotchi, make tamagotchi show up
 		this.makeNewTamagotchi();
 		this.startTheClock();
+		// this.makeTamaHungry();
 		// this.pet = new Tamagotchi("$("#nameTamaInput").val()")
 		//have tamagotchi ask its name
 	},
@@ -64,22 +66,40 @@ const game = {
 	},
 
 	startTheClock(){
-		let $timer = $("#timer");
+		let $sleepy = $("#sleepy");
+		let $age = $("#age");
+		let $hunger = $("#hunger");
+		let $boredom = $("#boredom");
 
 		const interval = setInterval(() => {
 			//count seconds moving up
-			$timer.text("Timer: " + (this.time+=1) + "s");
+			$sleepy.text("Sleepy: " + (this.pet.sleepy += 1));
+			$age.text("Age: " + (this.pet.age += 1));
+			$hunger.text("Hunger: " + (this.pet.hunger += 1));
+			$boredom.text("Boredom: " + (this.pet.boredom += 1));
 			//clear interval on death of tamagotchi
-		}, 1000);
+		}, 5000);
 	},
+
+	// makeTamaHungry(){
+	// 	let $hunger = $("span.hunger")
+	// 	if(this.time % 3 === 0) {
+	// 		$hunger.text("Hunger: " + (this.hunger+=1));
+	// 	}
+	// }
 
 }
 // game.startGame();
 
 game.blankTank();
 
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// below this line are the event handlers, these tell the game what to do based on user input
+////listeners can go in global scope but don't necessarily need to be
+		// no logic down here
+		// all that exists here are the events that call the methods from the 
+		//	tomagotchi and game objects
 
 $("#begin").on("click", () => {
 	game.startGame();
@@ -115,10 +135,6 @@ $("form").on("submit", (e) => {
 // // Morph your pet at certain ages.
 // // Animate your pet across the screen while it's alive.
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-////listeners can go in global scope but don't necessarily need to be
-		// no logic down here
-		// all that exists here are the events that call the methods from the tomagotchi and game objects
 
 
 
