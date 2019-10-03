@@ -56,7 +56,7 @@ body {
 
 .mouth {
 	font-size: 30px;
-	/*transform: rotate(90deg);*/
+	transform: rotate(90deg);
 }
 
 span {

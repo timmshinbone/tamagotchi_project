@@ -95,7 +95,7 @@ const game = {
 		let $sleepy = $("#sleepy")
 		//on click turn lights off
 		$lights.css("background", "rgba(0,0,0,.6)");
-		$sleepyTama.hide("slow");
+		$sleepyTama.fadeOut("slow");
 		//set sleepy to 0
 		this.pet.sleepy = 0;
 		$sleepy.text("Sleepy: " + 0);
@@ -109,7 +109,7 @@ const game = {
 		const $wakeUpTama = $("#tamagotchi");
 
 		$lights.css("background", "rgba(0,0,0,0)");
-		$wakeUpTama.show("slow");
+		$wakeUpTama.fadeIn("slow");
 		//restart timers
 	},
 
