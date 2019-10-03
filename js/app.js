@@ -20,6 +20,15 @@ class Tamagotchi{
 		// bounceAround(){
 
 		// };
+		this.goLeft = function(){
+			$("#tamagotchi").animate({"left": "-50px"}, 1000);
+			setTimeout(this.goLeft, 1000);
+		};
+
+		this.goRight = function(){
+			$("#tamagotchi").animate({"right": "50px"}, 1000, this.goLeft);
+			setTimeout(this.goRight, 1000);
+		};
 		// eatSomething(){
 
 		// };
@@ -42,6 +51,7 @@ const game = {
 	blankTank(){
 		$("#tamagotchi").hide();
 		$("form.nameTama").hide();
+		$("#food").hide();
 	},
 
 	// time: 0,
@@ -63,6 +73,7 @@ const game = {
 		$("#tamagotchi").show("slow",);
 		$("form.nameTama").show();
 		this.pet = new Tamagotchi(name);
+		this.pet.goLeft();
 	},
 
 	startTheClock(){
@@ -82,11 +93,11 @@ const game = {
 				$age.text("Age: " + (this.pet.age += 1));
 			} else if(this.time % 2 === 0){
 				$hunger.text("Hunger: " + (this.pet.hunger += 1));
-			} else if(this.time % 3 === 0){
+			} else if(this.time % 4 === 0){
 				$boredom.text("Boredom: " + (this.pet.boredom += 1));
 			}
 			//clear interval on death of tamagotchi
-		}, 2000);
+		}, 1000);
 	},
 
 	lightsOut() {
@@ -107,12 +118,25 @@ const game = {
 	lightsOn(){
 		const $lights = $("#tamagotchiTank");
 		const $wakeUpTama = $("#tamagotchi");
+		let $sleepy = $("#sleepy")
 
 		$lights.css("background", "rgba(0,0,0,0)");
 		$wakeUpTama.fadeIn("slow");
+		$sleepy.text("Sleepy: " + 0);
 		//restart timers
 	},
 
+	feedTama(){
+		const $food = $("#food");
+		const $hunger = $("#hunger");
+
+		$food.show("slow");
+		this.pet.hunger = 0;
+		$hunger.text("Hunger: " + 0);
+		if(this.time % 2 === 0){
+			$food.hide("slow");
+		}
+	}
 	// makeTamaHungry(){
 	// 	let $hunger = $("span.hunger")
 	// 	if(this.time % 3 === 0) {
@@ -153,12 +177,18 @@ $("form").on("submit", (e) => {
 
 $("#sleep").on("click", () => {
 	game.lightsOut();
-	console.log("lights out button works");
 });
 
 $("#wakeUp").on("click", () => {
 	game.lightsOn();
-	console.log("lights on button works");
+})
+
+$("#feed").on("click", () => {
+	game.feedTama();
+})
+
+$("#play").on("click", () => {
+	game.playWithTama();
 })
 // 	time
 // 	//properties outside of the tomagotchi, like timer
