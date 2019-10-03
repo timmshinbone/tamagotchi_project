@@ -20,21 +20,24 @@ class Tamagotchi{
 		// bounceAround(){
 
 		// };
-		this.goLeft = function(){
-			$("#tamagotchi").animate({"left": "-50px"}, 1000);
-			setTimeout(this.goLeft, 1000);
-		};
+		// this.goLeft = function(){
+		// 	$("#tamagotchi").animate({"left": "-50px"}, 1000);
+		// 	setTimeout(this.goLeft, 1000);
+		// };
 
-		this.goRight = function(){
-			$("#tamagotchi").animate({"right": "50px"}, 1000, this.goLeft);
-			setTimeout(this.goRight, 1000);
-		};
+		// this.goRight = function(){
+		// 	$("#tamagotchi").animate({"right": "50px"}, 1000, this.goLeft);
+		// 	setTimeout(this.goRight, 1000);
+		// };
 		// eatSomething(){
 
 		// };
-		// goToSleep(){
-
+		// this.getSleepy = function (){
+		// 	if(game.pet.sleepy >= 5){
+		// 		$("#eyes").text("ı ı").css("transform", "rotate(90deg)")
+		// 	}
 		// };
+
 		// die(){
 
 		// };
@@ -73,7 +76,8 @@ const game = {
 		$("#tamagotchi").show("slow",);
 		$("form.nameTama").show();
 		this.pet = new Tamagotchi(name);
-		this.pet.goLeft();
+		// this.pet.getSleepy();
+		// this.pet.goLeft();
 	},
 
 	startTheClock(){
@@ -86,7 +90,7 @@ const game = {
 		const interval = setInterval(() => {
 			//count seconds moving up
 			this.time += 1;
-			console.log(this.time);
+			// console.log(this.time);
 			if(this.time % 3 === 0){
 				$sleepy.text("Sleepy: " + (this.pet.sleepy += 1));
 			} else if(this.time % 5 === 0){
@@ -99,6 +103,12 @@ const game = {
 			//clear interval on death of tamagotchi
 		}, 1000);
 	},
+
+	getSleepy(){
+			if(this.pet.sleepy >= 5){
+				$("#eyes").text("ı ı").css("transform", "rotate(90deg)")
+			}
+		},
 
 	lightsOut() {
 		const $lights = $("#tamagotchiTank");
@@ -136,13 +146,18 @@ const game = {
 		if(this.time % 2 === 0){
 			$food.hide("slow");
 		}
+	},
+	
+	playWithTama(){
+		const $eyes = $("#eyes");
+		const $boredom = $("#boredom");
+
+		$eyes.fadeOut("slow");
+		$eyes.fadeIn("slow");
+		
+		this.pet.boredom = 0;
+		$boredom.text("Boredom: " + 0);
 	}
-	// makeTamaHungry(){
-	// 	let $hunger = $("span.hunger")
-	// 	if(this.time % 3 === 0) {
-	// 		$hunger.text("Hunger: " + (this.hunger+=1));
-	// 	}
-	// }
 
 }
 // game.startGame();
