@@ -32,15 +32,6 @@ class Tamagotchi{
 		// eatSomething(){
 
 		// };
-		// this.getSleepy = function (){
-		// 	if(game.pet.sleepy >= 5){
-		// 		$("#eyes").text("ı ı").css("transform", "rotate(90deg)")
-		// 	}
-		// };
-
-		// die(){
-
-		// };
 	}
 }
 
@@ -67,13 +58,16 @@ const game = {
 		//instantiate new Tamagotchi, make tamagotchi show up
 		this.makeNewTamagotchi();
 		this.startTheClock();
+		this.getSleepy();
+		this.tamaDies();
 		// this.makeTamaHungry();
 		// this.pet = new Tamagotchi("$("#nameTamaInput").val()")
 		//have tamagotchi ask its name
 	},
 //instantiates new Tamagotchi, make tamagotchi show up, name form shows up
 	makeNewTamagotchi(name){
-		$("#tamagotchi").show("slow",);
+		const $tamagotchi = $("#tamagotchi");
+		$tamagotchi.show("slow",);
 		$("form.nameTama").show();
 		this.pet = new Tamagotchi(name);
 		// this.pet.getSleepy();
@@ -103,12 +97,6 @@ const game = {
 			//clear interval on death of tamagotchi
 		}, 1000);
 	},
-
-	getSleepy(){
-			if(this.pet.sleepy >= 5){
-				$("#eyes").text("ı ı").css("transform", "rotate(90deg)")
-			}
-		},
 
 	lightsOut() {
 		const $lights = $("#tamagotchiTank");
@@ -140,11 +128,11 @@ const game = {
 		const $food = $("#food");
 		const $hunger = $("#hunger");
 
-		$food.show("slow");
+		$food.fadeIn("slow");
 		this.pet.hunger = 0;
 		$hunger.text("Hunger: " + 0);
 		if(this.time % 2 === 0){
-			$food.hide("slow");
+			$food.fadeOut("slow");
 		}
 	},
 	
@@ -154,11 +142,39 @@ const game = {
 
 		$eyes.fadeOut("slow");
 		$eyes.fadeIn("slow");
-		
+
 		this.pet.boredom = 0;
 		$boredom.text("Boredom: " + 0);
-	}
+	},
 
+	getSleepy(){
+		const $eyes = $("#eyes");
+		if(this.pet.sleepy >= 6){
+			$eyes.html("ı ı")
+			console.log($eyes);
+			// .css("transform", "rotate(90deg)")
+		} else if(this.pet.sleepy < 6){
+			$eyes.text("o o")
+			// .css("font-size", "30px")
+		}
+	},
+
+	// ageTama(){
+	// 	const $oldTama = $("#tamagotchi");
+	// 	if(this.pet.age > 7){
+	// 		$oldTama.css({})
+	// 	}
+	// },
+
+	tamaDies(){
+		if(this.pet.sleepy >= 10){
+			$("#eyes").text("x x");
+		} else if(this.pet.hunger >= 10){
+			$("#eyes").text("x x");
+		} else if(this.pet.boredom >= 10){
+			$("#eyes").text("x x");
+		}
+	}
 }
 // game.startGame();
 
@@ -167,7 +183,7 @@ game.blankTank();
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-////listeners can go in global scope but don't necessarily need to be
+////listeners can go in global scope but don't necessarily need to be/////
 		// no logic down here
 		// all that exists here are the events that call the methods from the 
 		//	tomagotchi and game objects
